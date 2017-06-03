@@ -1,8 +1,8 @@
 require "spec_helper"
 
-RSpec.describe FakeFSRmagick do
+RSpec.describe FakeFS::Magick do
   it "has a version number" do
-    expect(FakeFSRmagick::VERSION).not_to be nil
+    expect(described_class::VERSION).not_to be nil
   end
 
   describe "#activated?" do
@@ -11,7 +11,7 @@ RSpec.describe FakeFSRmagick do
         expect(described_class.activated?).to be false
       end
       it "does not fake Magick::Image" do
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
       end
     end
     context "after being activated" do
@@ -25,9 +25,9 @@ RSpec.describe FakeFSRmagick do
       end
       it "does fake Magick::Image" do
         begin
-          expect(Magick::Image).not_to be_fake
+          expect(::Magick::Image).not_to be_fake
           described_class.activate!
-          expect(Magick::Image).to be_fake
+          expect(::Magick::Image).to be_fake
         ensure
           described_class.deactivate!
         end
@@ -42,7 +42,7 @@ RSpec.describe FakeFSRmagick do
       it "does not fake Magick::Image" do
         described_class.activate!
         described_class.deactivate!
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
       end
     end
   end
@@ -50,9 +50,9 @@ RSpec.describe FakeFSRmagick do
   describe "#activate!" do
     it "does fake Magick::Image" do
       begin
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
         described_class.activate!
-        expect(Magick::Image).to be_fake
+        expect(::Magick::Image).to be_fake
       ensure
         described_class.deactivate!
       end
@@ -63,7 +63,7 @@ RSpec.describe FakeFSRmagick do
     it "restores Magick::Image" do
       described_class.activate!
       described_class.deactivate!
-      expect(Magick::Image).not_to be_fake
+      expect(::Magick::Image).not_to be_fake
     end
   end
 
@@ -80,9 +80,9 @@ RSpec.describe FakeFSRmagick do
       it "does fake Magick::Image" do
         begin
           described_class.hook!
-          expect(Magick::Image).not_to be_fake
+          expect(::Magick::Image).not_to be_fake
           FakeFS.activate!
-          expect(Magick::Image).to be_fake
+          expect(::Magick::Image).to be_fake
         ensure
           FakeFS.deactivate!
           described_class.deactivate_hook!
@@ -95,7 +95,7 @@ RSpec.describe FakeFSRmagick do
           described_class.hook!
           FakeFS.activate!
           FakeFS.deactivate!
-          expect(Magick::Image).not_to be_fake
+          expect(::Magick::Image).not_to be_fake
         ensure
           described_class.deactivate_hook!
         end
@@ -109,7 +109,7 @@ RSpec.describe FakeFSRmagick do
         described_class.hook!
         described_class.deactivate_hook!
         FakeFS.activate!
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
       ensure
         FakeFS.deactivate!
       end
@@ -140,9 +140,9 @@ RSpec.describe FakeFSRmagick do
   describe "#with" do
     context "in the block given" do
       it "does fake Magick::Image" do
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
         described_class.with do
-          expect(Magick::Image).to be_fake
+          expect(::Magick::Image).to be_fake
         end
       end
     end
@@ -151,7 +151,7 @@ RSpec.describe FakeFSRmagick do
         described_class.with do
           #nothing
         end
-        expect(Magick::Image).not_to be_fake
+        expect(::Magick::Image).not_to be_fake
       end
     end
   end

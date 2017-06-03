@@ -1,23 +1,24 @@
 require "rmagick"
 
-module FakeFSRmagick
+module FakeFS
+module Magick
 
   def self.activate!
-    Magick.class_eval do
+    ::Magick.class_eval do
       remove_const(:Image)
-      const_set(:Image, ::FakeFSRmagick::FakeImage)
+      const_set(:Image, ::FakeFS::Magick::FakeImage)
     end
   end
 
   def self.deactivate!
-    Magick.class_eval do
+    ::Magick.class_eval do
       remove_const(:Image)
-      const_set(:Image, ::FakeFSRmagick::RealImage)
+      const_set(:Image, ::FakeFS::Magick::RealImage)
     end
   end
 
   def self.activated?
-    ::Magick::Image == ::FakeFSRmagick::FakeImage
+    ::Magick::Image == ::FakeFS::Magick::FakeImage
   end
 
   def self.with
@@ -42,4 +43,5 @@ module FakeFSRmagick
     @@with_hook = false
   end
   
+end
 end

@@ -1,8 +1,9 @@
 require "rmagick"
 
-module FakeFSRmagick
+module FakeFS
+module Magick
 
-  RealImage = Magick::Image
+  RealImage = ::Magick::Image
 
   module RealImageInstance
     def faked?
@@ -19,4 +20,5 @@ module FakeFSRmagick
   RealImage.include(RealImageInstance)
   RealImage.extend(RealImageClass)
 
+end
 end

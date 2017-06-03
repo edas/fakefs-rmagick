@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "rmagick"
 require "fakefs/safe"
-require "fakefs_rmagick/safe"
+require "fakefs/rmagick/safe"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

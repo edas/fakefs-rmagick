@@ -1,7 +1,7 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe FakeFSRmagick::FakeImage do
+RSpec.describe FakeFS::Magick::FakeImage do
 
   let(:local_file) { file = File.join( File.dirname(__FILE__), "support", "image.png" ) }
   
@@ -23,7 +23,7 @@ RSpec.describe FakeFSRmagick::FakeImage do
   describe "::read" do
     it "returns image objects" do
       described_class.read(local_file).each do |image|
-        expect(image).to be_a(FakeFSRmagick::RealImage)
+        expect(image).to be_a(FakeFS::Magick::RealImage)
       end
     end
     it "fake image objects returned" do

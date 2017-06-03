@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe FakeFSRmagick::RealImage do
+RSpec.describe FakeFS::Magick::RealImage do
 
   let(:local_file) { file = File.join( File.dirname(__FILE__), "support", "image.png" ) }
 

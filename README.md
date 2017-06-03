@@ -1,11 +1,16 @@
-# FakeFR/Rmagick
+# FakeFS/Rmagick
+
+Allows to use [RMagick](https://rmagick.github.io/) with [FakeFS](https://github.com/fakefs/fakefs)
+
+
+Warning:  Both FakeFS and FakeFS break usual naming convention for gems ('fakefs' => `FakeFS`, 'rmagick' => `Magick`). I choosed to respect the naming of these gem so I had to break these conventions myself. The gem name is "fakefs-rmagick" but the corresponding module will be in `FakeFS::Magick`.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'fakefs_rmagick'
+gem 'fakefs-rmagick'
 ```
 
 And then execute:
@@ -14,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fakefs_rmagick
+    $ gem install fakefs-rmagick
 
 ## Usage
 
@@ -22,24 +27,24 @@ To be able to use RMagick with FakeFS:
 
 ```ruby
 require 'fakefs'
-require 'fakefs_rmagick'
+require 'fakefs/rmagick'
 ```
 
 This will slow Magick::Image#write and a little but may also consume a lot of memory when writing large images. If you want, you may activate the override on demand with the following:
 
 ```ruby
 require 'fakefs/safe'
-require 'fakefs_rmagick/safe'
+require 'fakefs/rmagick/safe'
 
-FakeFSRmagick.activate!
+FakeFS::Magick.activate!
 FakeFS.activate!
   # your code
 FakeFS.deactivate!
-FakeFSRmagick.activate!
+FakeFS::Magick.activate!
 
 # or (preferably)
 
-FakeFSRmagick.with do
+FakeFS::Magick.with do
   FakeFS.with do
     # your code
   end
@@ -51,14 +56,14 @@ end
 For convenience, you can hook directly into FakeFS and let FakeFS::Magick activate itself automaticaly with FakeFS.
 
 ```ruby
-require 'fakefs_rmagick/hook'
+require 'fakefs/rmagick/hook'
 ```
 
 or manualy with:
 ```ruby
-require 'fakefs_rmagick/safe'
+require 'fakefs/rmagick/safe'
 
-FakeFSRmagick.hook!
+FakeFS::Magick.hook!
 ```
 
 

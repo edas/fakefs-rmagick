@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fakefs_rmagick/version'
+require 'fakefs/rmagick/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "fakefs_rmagick"
-  spec.version       = FakeFSRmagick::VERSION
+  spec.name          = "fakefs-rmagick"
+  spec.version       = FakeFS::Magick::VERSION
   spec.authors       = ["Éric Daspet"]
   spec.email         = ["eric.daspet+gem@survol.fr"]
 
